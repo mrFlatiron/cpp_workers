@@ -21,8 +21,7 @@ INCLUDEPATH += src
 
 SOURCES += \
     src/main/main.cpp \
-    src/test/some_test.cpp \
-    src/work/xml_worker.cpp
+    src/test/xml_worker_test.cpp
 
 HEADERS += \
     3rd_party/include/gtest/gtest.h \
@@ -30,9 +29,15 @@ HEADERS += \
     src/common/enum_misc.h \
     src/common/enum_range.h \
     src/common/template_utils.h \
-    src/common/typesafe_id.h \
-    src/common/utils.h \
     src/work/workers.h \
-    src/common/debug_utils.h \
     src/work/xml_worker.h \
-    src/work/std_containers_impls.h
+    src/work/std_containers_impls.h \
+    src/work/work.h \
+    src/work/enum_helper.h \
+    src/work/enum_misc.h \
+    src/work/enum_range.h \
+    src/work/template_utils.h \
+    src/work/internal/enum_helper.h \
+    src/work/internal/enum_misc.h \
+    src/work/internal/enum_range.h \
+    src/work/internal/template_utils.h

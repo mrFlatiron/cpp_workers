@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <memory>
-#include <unordered_set>
 #include <unordered_map>
 #include <map>
 
@@ -51,7 +50,7 @@ namespace work
             work::kv_element temp_kv_el (temp_p.first, temp_p.second);
 
             work::process (worker, temp_kv_el, "el");
-            umap.emplace (temp_kv_el.k, temp_kv_el.v.get ());
+            umap.emplace (std::move (temp_kv_el.k), std::move (temp_kv_el.v.get ()));
           }
       }
 
@@ -79,7 +78,7 @@ namespace work
             work::kv_element temp_kv_el (temp_p.first, temp_p.second);
 
             work::process (worker, temp_kv_el, "el");
-            map.emplace (temp_kv_el.k, temp_kv_el.v.get ());
+            map.emplace (std::move (temp_kv_el.k), std::move (temp_kv_el.v.get ()));
           }
       }
 
@@ -97,7 +96,10 @@ namespace work
   template<typename T, typename Worker>
   bool worker_process (Worker &worker, std::unique_ptr<T> &ptr)
   {
-    return work::process (worker, *ptr, "uptr");
+      if (worker.action () == action_t::load)
+        ptr = std::make_unique<T> ();
+
+      return work::process (worker, *ptr, "uptr");
   }
 }
 
